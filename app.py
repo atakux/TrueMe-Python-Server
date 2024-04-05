@@ -1,6 +1,8 @@
 from Predict import predict
 from flask import Flask, request, jsonify
+from PIL import Image
 import io
+import numpy as np
 
 app = Flask(__name__)
 
