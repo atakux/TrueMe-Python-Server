@@ -26,8 +26,11 @@ def predict(image_path):
     
     # Print the class index with the corresponding prediction
     for i, p in enumerate(prediction[0]):
-        # print(f"{class_indices[i]}: {p}")
-        predicted_class_dict[class_indices[i]] = float(p)  # Convert numpy float32 to Python float
+        if class_indices[i] == 'wrinkles':
+            # Adjust the prediction value for wrinkles
+            predicted_class_dict[class_indices[i]] = float(p) / 2
+        else:
+            predicted_class_dict[class_indices[i]] = float(p)  # Convert numpy float32 to Python float
 
     # Get predicted class label
     predicted_class_index = np.argmax(prediction)
@@ -36,3 +39,8 @@ def predict(image_path):
     print("Predicted class:", predicted_class)
     
     return predicted_class_dict
+
+
+if __name__ == "__main__":
+    image_path = input("Enter image path: ")
+    print(predict(image_path))
